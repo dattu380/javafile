@@ -1,0 +1,22 @@
+FROM ubuntu:18.04
+MAINTAINER  "dattu"
+RUN apt-get update -y
+RUN apt-get install apache2 -y
+RUN apt-get install git -y
+RUN cd /var/www/html && \
+          git clone https://github.com/dattu380/sample.git
+COPY testfile.txt var/www/html
+ENTRYPOINT apachectl -D FOREGROUND
+
+
+
+
+
+FROM ubuntu:18.04
+MAINTAINER  "dattu"
+RUN apt-get update -y
+RUN apt-get install apache2 -y
+ADD ./var/www/html
+ENTRYPOINT apachectl -D FOREGROUND
+ENV name Devops
+
